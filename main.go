@@ -3,11 +3,11 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	//"runtime"
 	"strconv"
-	"runtime"
 )
 
-var memoryPool = []([]complex128){}
+var memoryPool = [](*[1024 * 64]complex128){}
 var memoryAllocatedInMB int = 0
 
 func main() {
@@ -29,9 +29,8 @@ func AllocateMemory(c *gin.Context) {
 	}
 
 	for i := 0; i < size; i++ {
-		a := make([]complex128, 1024*64, 1024*64)
-		memoryPool = append(memoryPool, a)
-		runtime.GC()
+		memoryPool = append(memoryPool, &([1024 * 64]complex128{}))
+		//runtime.GC()
 		memoryAllocatedInMB++
 	}
 
