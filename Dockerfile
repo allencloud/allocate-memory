@@ -10,4 +10,6 @@ RUN export GOPATH=/root/allocate-memory && \
 	go get -d && \
 	go build
 
+EXPOSE 8080
+
 CMD ["./allocate-memory"]
