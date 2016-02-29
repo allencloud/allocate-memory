@@ -12,11 +12,11 @@ var memoryAllocatedInMB int = 0
 
 func main() {
 	router := gin.Default()
-	router.GET("/", func(c *gin.Contex) {
-		c.JSON(200, "OK")
+	router.GET("/", func(c *gin.Context) {
+		c.String(200, "OK")
 	})
-	router.GET("/ping", func(c *gin.Contex) {
-		c.JSON(200, "pong")
+	router.GET("/ping", func(c *gin.Context) {
+		c.String(200, "pong")
 	})
 	router.GET("/memory/:size/action/allocate", AllocateMemory)
 	router.Run(":8080")
