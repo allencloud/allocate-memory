@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os/exec"
 	//"runtime"
 	"strconv"
 )
@@ -18,7 +19,11 @@ func main() {
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
+	router.GET("/_ping", func(c *gin.Context) {
+		c.String(200, "pong")
+	})
 	router.GET("/memory/:size/action/allocate", AllocateMemory)
+	router.GET("/cpu", ConsumeCPU)
 	router.Run(":8080")
 }
 
@@ -43,4 +48,11 @@ func AllocateMemory(c *gin.Context) {
 	message := "Allocated about " + strconv.Itoa(memoryAllocatedInMB) + " MB memory."
 
 	c.String(200, message)
+}
+
+func ConsumeCPU(c *gin.Context) {
+	cmd := exec.Command("bash", "-c", "awk 'BEGIN{while (i=1) {}}'")
+	if err := cmd.Run(); err != nil {
+		c.String(500, err.Error())
+	}
 }
