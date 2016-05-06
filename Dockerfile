@@ -18,7 +18,7 @@ RUN g++ memory.cpp -o memory.out
 RUN export PATH=$PATH:/usr/local/go/bin && \
 	export GOPATH=/root/allocate-memory && \
 	go get -d && \
-	go build
+	go build allocate-memory.go
 
 EXPOSE 8080
 

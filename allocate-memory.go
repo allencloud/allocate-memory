@@ -3,17 +3,16 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+
 	//"github.com/satori/go.uuid"
 	"net/http"
 	"os"
 	"os/exec"
-	"runtime"
 	"strconv"
-	"time"
 )
 
 var (
-	//memoryPool              = map[string](*[1024 * 1024]complex128){}
+	memoryPool              = [](*[1024 * 64]complex128){}
 	memoryAllocatedInMB int = 0
 	release_interval    int
 )
@@ -57,19 +56,17 @@ func main() {
 func AllocateQuotaMemory(c *gin.Context) {
 	//id := uuid.NewV4().String()
 
-	a := [1024 * 1024]complex128{}
+	cmd := exec.Command("./allocate-memory")
 
-	fmt.Println(a)
-
-	time.Sleep(time.Duration(release_interval) * time.Second)
-
-	//delete(memoryPool, id)
-	runtime.GC()
+	if err := cmd.Run(); err != nil {
+		c.String(http.StatusInternalServerError, err.Error())
+		return
+	}
 
 	c.String(http.StatusOK, "OK")
 }
 
-/*func AllocateCustomMemory(c *gin.Context) {
+func AllocateCustomMemory(c *gin.Context) {
 	size, err := strconv.Atoi(c.Param("size"))
 	if err != nil {
 		c.String(http.StatusBadRequest, "memory allocate input should be an interger.")
@@ -90,7 +87,7 @@ func AllocateQuotaMemory(c *gin.Context) {
 	message := "Allocated about " + strconv.Itoa(memoryAllocatedInMB) + " MB memory."
 
 	c.String(200, message)
-}*/
+}
 
 func ConsumeCPU(c *gin.Context) {
 	cmd := exec.Command("bash", "-c", "awk 'BEGIN{while (i=1) {}}'")
