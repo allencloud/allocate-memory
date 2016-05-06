@@ -38,6 +38,8 @@ func init() {
 
 func main() {
 	router := gin.Default()
+
+	// just the ping api
 	router.GET("/", func(c *gin.Context) {
 		c.String(200, "OK")
 	})
@@ -47,9 +49,18 @@ func main() {
 	router.GET("/_ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
+
+	// consume 256KB memory immediately,
+	// and release the memory after 10s
 	router.GET("/memory", AllocateQuotaMemory)
-	//router.GET("/memory/:size/action/allocate", AllocateCustomMemory)
+
+	// comsume :size memory of server
+	// unit is MB
+	router.GET("/memory/:size/action/allocate", AllocateCustomMemory)
+
+	// consume as much cpu as it can
 	router.GET("/cpu", ConsumeCPU)
+
 	router.Run(":8080")
 }
 

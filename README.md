@@ -3,31 +3,30 @@
 Allocate memory is web application supposed to dynamically allocate memory according to web request.
 
 ## web API
-There is only one API:
+There is API provided:
 
-```
-GET /memory/:size/action/allocate
-```
+|URI Path|Description|
+| :-------------: | :--------------: |
+|/| return "OK"|
+|/ping|return "pong"|
+|/_ping|return "pong"|
+|/memory| allocate 256KB memeory and release it after 10s|
+|/memory/:size/action/allocate|allocate size MB meory|
+|/cpu|consume as much CPU as it can|
 
-size means memory needed to be allocated with unit of MB
 
 ## Listen Port
 
 This application will listen on port 8080.
 
-## Guidance
-###1.Start web application
+## Participating
 
-```
-cd allocate-memory
-export GOPATH=`pwd`
-go get -d
-go build
-./allocate-memory
-``` 
+You can contribute to Daoker in several different ways:
 
-###2.test
-allocate 256 MB memory
-```
-curl http://127.0.0.1:8080/memory/256/action/allocate 
-```
+* To report a problem or request a feature, please feel free to file an issue.
+
+* Of course, we welcome pull requests and patches. Setting up a local Daoker development environment and submitting PRs is described here.
+
+
+## Copyright and license
+Copyright © 2016. All rights reserved
