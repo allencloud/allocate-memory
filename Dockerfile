@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
 
-RUN apt-get update && \
-	apt-get install wget g++ && \
-	wget https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz && \
+RUN	apt-get update && \
+	apt-get install -y wget g++ git && \
+	wget -q https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz && \
 	tar -C /usr/local -xzf go1.4.linux-amd64.tar.gz && \
 	rm go1.4.linux-amd64.tar.gz && \
 	apt-get clean
