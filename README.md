@@ -10,7 +10,7 @@ There is API provided:
 |/| return "OK"|
 |/ping|return "pong"|
 |/_ping|return "pong"|
-|/memory| allocate 256KB memeory and release it after 10s|
+|/memory| allocate 256KB memery and release it after 10s|
 |/memory/:size/action/allocate|allocate size MB meory|
 |/cpu|consume as much CPU as it can|
 
