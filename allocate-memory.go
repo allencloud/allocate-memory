@@ -56,7 +56,7 @@ func main() {
 func AllocateQuotaMemory(c *gin.Context) {
 	//id := uuid.NewV4().String()
 
-	cmd := exec.Command("./allocate-memory")
+	cmd := exec.Command("./memory.out")
 
 	if err := cmd.Run(); err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
