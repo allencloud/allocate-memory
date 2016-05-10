@@ -17,7 +17,7 @@ var (
 	release_interval    int
 )
 
-const RELEASE_INTERVAL int = 10
+const RELEASE_INTERVAL int = 180
 
 func init() {
 	if os.Getenv("RELEASE_INTERVAL") != "" {

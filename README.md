@@ -21,11 +21,11 @@ This application will listen on port 8080.
 
 ## Participating
 
-You can contribute to Daoker in several different ways:
+You can contribute to this project in several different ways:
 
 * To report a problem or request a feature, please feel free to file an issue.
 
-* Of course, we welcome pull requests and patches. Setting up a local Daoker development environment and submitting PRs is described here.
+* Of course, we welcome pull requests and patches. Setting up a local this project development environment and submitting PRs is described here.
 
 
 ## Copyright and license
