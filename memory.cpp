@@ -7,7 +7,7 @@ int main() {
 
 	double *array = new double[1024*32]; 
 
-	sleep(10);
+	sleep(180);
 
 	return 0;
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"time"
 
 	//"github.com/satori/go.uuid"
 	"net/http"
@@ -66,13 +67,14 @@ func main() {
 
 func AllocateQuotaMemory(c *gin.Context) {
 	//id := uuid.NewV4().String()
+	go func() {
+		cmd := exec.Command("./memory.out")
+		if err := cmd.Run(); err != nil {
+			fmt.Println(err.Error())
+		}
+	}()
 
-	cmd := exec.Command("./memory.out")
-
-	if err := cmd.Run(); err != nil {
-		c.String(http.StatusInternalServerError, err.Error())
-		return
-	}
+	time.Sleep(2 * time.Second)
 
 	c.String(http.StatusOK, "OK")
 }
